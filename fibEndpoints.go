@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"fib-api/fib"
-	"fib-api/response"
+	"fibo-api/fib"
+	"fibo-api/response"
 	"math/big"
 	"net/http"
 	"strconv"
@@ -21,33 +21,35 @@ func Fibo(w http.ResponseWriter, r *http.Request) {
 
 	// Convert numbers to indexes
 	lastIndex, err := strconv.ParseInt(lastNumber, 10, 64)
-	if check(err, w, resp, "incorrent data type", 100) {
+	if check(err, w, resp, "parameter `y` has an invalid data type", 100) {
 		return
 	}
-	firstIndex, err := strconv.ParseInt(firstNumber,10,64)
-	if check(err, w, resp, "incorrect data type", 101) {
+	firstIndex, err := strconv.ParseInt(firstNumber, 10, 64)
+	if check(err, w, resp, "parameter `x` has an invalid data type", 101) {
 		return
 	}
+
 	// Validate indices
-	if firstIndex >= lastIndex {
-		if check(errors.New("incorrect indices"), w, resp,"",102) {
+	// If x = y, then the answer will contain only one number from the sequence
+	if firstIndex > lastIndex {
+		if check(errors.New("parameter `x` cannot be more than parameter `y`"), w, resp, "failed to validtate indices", 102) {
 			return
 		}
 	}
 
+	// Calculating the fibonacci sequence based on the x,y
 	fibList := make([]*big.Int, 0, 0)
 	for i := 0; i <= int(lastIndex); i++ {
 		fibs := fib.FibonacciBig(uint(i))
 		fibList = append(fibList, fibs)
 	}
-	index := int(firstIndex)
-	fibList = fibList[index:]
+	fibList = fibList[int(firstIndex):]
 
 	content, err := json.Marshal(struct {
 		StatusResponse *response.StatusResponse `json:"status_response"`
-		Fibonacci      []*big.Int              `json:"fibonacci"`
+		Fibonacci      []*big.Int               `json:"fibonacci"`
 	}{resp, fibList})
-	if check(err, w, resp, "error marshalling response",103) {
+	if check(err, w, resp, "error marshalling response", 103) {
 		return
 	}
 	w.Write(content)

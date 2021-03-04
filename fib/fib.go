@@ -3,7 +3,7 @@ package fib
 import "math/big"
 
 // Calculating the fibonacci sequence
-func FibonacciBig(y uint) *big.Int {
+func Fibonacci(y uint) *big.Int {
 	if y <= 1 {
 		return big.NewInt(int64(y))
 	}

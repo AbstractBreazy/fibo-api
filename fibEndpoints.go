@@ -10,6 +10,7 @@ import (
 	"strconv"
 )
 
+// Fibo endpoint calculates the Fibonacci Sequence
 func Fibo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	resp := response.New()
@@ -40,7 +41,7 @@ func Fibo(w http.ResponseWriter, r *http.Request) {
 	// Calculating the fibonacci sequence based on the x,y
 	fibList := make([]*big.Int, 0, 0)
 	for i := 0; i <= int(lastIndex); i++ {
-		fibs := fib.FibonacciBig(uint(i))
+		fibs := fib.Fibonacci(uint(i))
 		fibList = append(fibList, fibs)
 	}
 	fibList = fibList[int(firstIndex):]

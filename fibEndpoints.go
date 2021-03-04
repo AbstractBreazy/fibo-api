@@ -57,6 +57,7 @@ func Fibo(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// Custom error handler
 func check(err error, w http.ResponseWriter, resp *response.StatusResponse, message string, code int) bool {
 	if err != nil {
 		resp.Status = false

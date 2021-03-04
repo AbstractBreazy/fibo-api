@@ -33,6 +33,8 @@ Open the directory `C:\Projects\Go\src` and type
 
 `git clone https://github.com/AbstractBreazy/fibo-api.git` in local terminal.
 
+You have to install `https://git-scm.com/downloads` to do it.
+
 * Final steps 
 
 Open the directory `C:\Projects\Go\src\fibo-api` and type `go install` to install the packages named by the import paths.

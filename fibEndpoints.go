@@ -33,7 +33,7 @@ func Fibo(w http.ResponseWriter, r *http.Request) {
 	// Validate indices
 	// If x = y, then the answer will contain only one number from the sequence
 	if firstIndex > lastIndex {
-		if check(errors.New("parameter `x` cannot be more than parameter `y`"), w, resp, "failed to validtate indices", 102) {
+		if check(errors.New("parameter `x` cannot be more than parameter `y`"), w, resp, "failed to validate indices", 102) {
 			return
 		}
 	}
